@@ -1,0 +1,19 @@
+{
+  "name": "boseapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erikttv/alarm_clock_bose.git"
+  },
+  "author": "Erik T. T.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/erikttv/alarm_clock_bose/issues"
+  },
+  "homepage": "https://github.com/erikttv/alarm_clock_bose#readme"
+}
