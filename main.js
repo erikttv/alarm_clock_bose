@@ -12,12 +12,24 @@ xhttp.onreadystatechange = function (){
 }
 */
 
-function getInfoAPI(){
-    xhr.open('GET','192.168.1.200:8090/info', true);
-    xhr.send();
-    console.log(xhr.responseXML);
+
+// ipcMain method coming in
+ipcMain.on('boseAPI', (event, arg1, arg2, arg3) => {
+    console.log('boseAPI: ' + arg1 + ' ' + arg2 + ' ' + arg3);
+    boseAPI[arg1](arg2, arg3);
+});
+
+// Object with API connected to Bose Speaker
+let boseAPI = {
+    getInfo: function(IPAdress){
+        xhr.open('GET', IPAdress + ':8090/info', true);
+        xhr.send();
+        // Must parse the response somehow
+        console.log(xhr.responseXML);
+    }
 }
 
+// Setting up and starting electron below 
 function startHomescreen(){
     const win = new BrowserWindow({
         width: 800,
@@ -40,7 +52,7 @@ app.on('window-all-closed', ()=> {
 
 app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
+      startHomescreen();
     }
   });
 
