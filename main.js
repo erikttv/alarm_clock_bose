@@ -32,8 +32,8 @@ let boseAPI = {
 // Setting up and starting electron below 
 function startHomescreen(){
     const win = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 350,
+        height: 500,
         webPreferences: {
             nodeIntegration: true
         }
