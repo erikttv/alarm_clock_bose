@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/erikttv/alarm_clock_bose/issues"
   },
-  "homepage": "https://github.com/erikttv/alarm_clock_bose#readme"
+  "homepage": "https://github.com/erikttv/alarm_clock_bose#readme",
+  "dependencies": {
+    "xmlhttprequest": "^1.8.0"
+  }
 }
