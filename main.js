@@ -16,18 +16,17 @@ let boseAPI = {
     getInfo: function(){
         var options = {
             'method': 'GET',
-            'url': 'http://192.168.1.200:8090/info',
+            'url': 'http://' + ipAdress + socket + '/info',
           };
         request(options, function (error, response) {
             if (error) throw new Error(error);
             console.log(response.body);
         });
     }, 
-
-    startAlarm: function(preset){
+    startPreset: function(preset){
         var options = {
             'method': 'POST',
-            'url': 'http://192.168.1.200:8090/key',
+            'url': 'http://' + ipAdress + socket + '/key',
             'headers': {
               'Content-Type': 'application/xml'
             },
@@ -41,7 +40,7 @@ let boseAPI = {
     stopAudio: function(){
         var options = {
             'method': 'POST',
-            'url': 'http://192.168.1.200:8090/key',
+            'url': 'http://' + ipAdress + socket + '/key',
             'headers': {
               'Content-Type': 'application/xml'
             },
