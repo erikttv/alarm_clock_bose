@@ -5,3 +5,11 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
   }
+
+.outline{
+  /* Add so that the background color is #f2f9ff, should stop when text is finished */
+  /*text-shadow: -1px 0 #f2f9ff, 0 1px #f2f9ff, 1px 0 #f2f9ff, 0 -1px #f2f9ff; */
+  /* text-decoration-color: #f2f9ff; */
+  background-color: #f2f9ff;
+  position: relative;
+}

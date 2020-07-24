@@ -1,17 +1,9 @@
 const {app, BrowserWindow, ipcMain} = require('electron');
+var request = require('request');
 
-// Setting up xml for Bose
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-var xhr = new XMLHttpRequest();
-
-/*
-xhttp.onreadystatechange = function (){
-    if (xhttp.readyState == 4 && xhttp.status == 200){
-        xmlDoc = xhttp.responseXML;
-    }
-}
-*/
-
+// Global variables used in the request to bose API
+var ipAdress = '192.168.1.200';
+var socket = ':8090';
 
 // ipcMain method coming in
 ipcMain.on('boseAPI', (event, arg1, arg2, arg3) => {
@@ -21,15 +13,34 @@ ipcMain.on('boseAPI', (event, arg1, arg2, arg3) => {
 
 // Object with API connected to Bose Speaker
 let boseAPI = {
-    getInfo: function(IPAdress){
-        xhr.open('GET', IPAdress + ':8090/info', true);
-        xhr.send();
-        // Must parse the response somehow
-        console.log(xhr.responseXML);
+    getInfo: function(){
+        var options = {
+            'method': 'GET',
+            'url': 'http://192.168.1.200:8090/info',
+          };
+        request(options, function (error, response) {
+            if (error) throw new Error(error);
+            console.log(response.body);
+        });
     }, 
 
     startAlarm: function(preset){
-        console.log(preset);
+        var options = {
+            'method': 'POST',
+            'url': 'http://192.168.1.200:8090/key',
+            'headers': {
+              'Content-Type': 'application/xml'
+            },
+            body: `<?xml version="1.0" ?>\n<key state="release" sender="Gabbo">` + preset + `</key>`
+          };
+        request(options, function (error, response) {
+            if (error) throw new Error(error);
+            console.log(response.body);
+        });
+    console.log(preset);
+    },
+    stopAudio: function(){
+
     }
 }
 
