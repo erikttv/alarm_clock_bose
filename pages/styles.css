@@ -1,5 +1,5 @@
 body {
-    background-image: url('./images/nautical.jpg');
+    background-image: url('./images/confetti.jpg');
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -10,6 +10,31 @@ body {
   /* Add so that the background color is #f2f9ff, should stop when text is finished */
   /*text-shadow: -1px 0 #f2f9ff, 0 1px #f2f9ff, 1px 0 #f2f9ff, 0 -1px #f2f9ff; */
   /* text-decoration-color: #f2f9ff; */
-  background-color: #f2f9ff;
+  background-color: #ffffff;
   position: relative;
 }
+
+button {
+  display: inline-block;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  background: #ffffff;
+  border: 1px solid #a0cfff;
+  color: #000000;
+  -webkit-appearance: none;
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  margin: 3px;
+  transition: .1s;
+  font-weight: 500;
+  padding: 12px 20px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.middle{
+  text-align: center;
+}
+

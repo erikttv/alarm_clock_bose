@@ -7,8 +7,10 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1 class="outline">Hello world!</h1>
-    <div>
+    <div class="middle outline">
+        <h1>Hello world!</h1>
+    </div>
+    <div class="middle">
         <button id="PRESET_1" type="button" onclick="startAlarm(this.id)">1</button>
         <button id="PRESET_2" type="button" onclick="startAlarm(this.id)">2</button>
         <button id="PRESET_3" type="button" onclick="startAlarm(this.id)">3</button>
@@ -17,18 +19,20 @@
         <button id="PRESET_5" type="button" onclick="startAlarm(this.id)">5</button>
         <button id="PRESET_6" type="button" onclick="startAlarm(this.id)">6</button>
     </div>
-    <div>
+    <div class="middle">
         <button type="button" onclick="pauseAudio()">Pause Audio</button>
     </div>
 <!-- Down below is credit for images -->
 <!-- Move this section to credit section in electron -->
-    <div>
-        <p class="outline"> 
+<!-- 
+    <div class="outline">
+        <p> 
             Image by <a href="https://pixabay.com/users/fevzizirhlioglu-3219056/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1637197">fevzizirhlioglu</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1637197">Pixabay</a> 
             <br>
             Image by <a href="https://pixabay.com/users/No-longer-here-19203/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=937738">No-longer-here</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=937738">Pixabay</a>
         </p>
     </div>
+-->
     <script src="./homescreen.js"></script>
 </body>
 </html>
