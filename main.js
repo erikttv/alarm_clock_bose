@@ -1,4 +1,4 @@
-const {app, BrowserWindow, BrowserView, ipcMain} = require('electron');
+const {app, BrowserWindow, ipcMain} = require('electron');
 
 // Setting up xml for Bose
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
@@ -26,6 +26,10 @@ let boseAPI = {
         xhr.send();
         // Must parse the response somehow
         console.log(xhr.responseXML);
+    }, 
+
+    startAlarm: function(preset){
+        console.log(preset);
     }
 }
 
