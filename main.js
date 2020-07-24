@@ -37,10 +37,20 @@ let boseAPI = {
             if (error) throw new Error(error);
             console.log(response.body);
         });
-    console.log(preset);
     },
     stopAudio: function(){
-
+        var options = {
+            'method': 'POST',
+            'url': 'http://192.168.1.200:8090/key',
+            'headers': {
+              'Content-Type': 'application/xml'
+            },
+            body: `<?xml version="1.0" ?>\n<key state="press" sender="Gabbo">PAUSE</key>`
+          };
+        request(options, function (error, response) {
+            if (error) throw new Error(error);
+            console.log(response.body);
+        });
     }
 }
 
