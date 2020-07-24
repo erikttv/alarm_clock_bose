@@ -5,5 +5,5 @@ function startAlarm(preset){
 }
 
 function stopAudio(){
-    ipcRenderer.send('boseAPI', 'stopAudio');
+    ipcRenderer.send('boseAPI', 'pauseAudio');
 }

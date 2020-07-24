@@ -37,7 +37,7 @@ let boseAPI = {
             console.log(response.body);
         });
     },
-    stopAudio: function(){
+    pauseAudio: function(){
         var options = {
             'method': 'POST',
             'url': 'http://' + ipAdress + socket + '/key',
