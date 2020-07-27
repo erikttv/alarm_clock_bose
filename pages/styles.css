@@ -1,10 +1,14 @@
 body {
-    background-image: url('./images/confetti.jpg');
+    background-image: url('./images/forest_road.jpg');
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
   }
+
+h1 {
+  color: #E3F0DC;
+}
 
 .outline{
   /* Add so that the background color is #f2f9ff, should stop when text is finished */
@@ -19,8 +23,8 @@ button {
   line-height: 1;
   white-space: nowrap;
   cursor: pointer;
-  background: #ffffff;
-  border: 1px solid #a0cfff;
+  background: #777262;
+  border: 1px solid #92B181;
   color: #000000;
   -webkit-appearance: none;
   text-align: center;

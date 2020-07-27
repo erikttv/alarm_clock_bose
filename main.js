@@ -11,6 +11,22 @@ ipcMain.on('boseAPI', (event, arg1, arg2, arg3) => {
     boseAPI[arg1](arg2, arg3);
 });
 
+ipcMain.on('alarmClock', (event, arg1, arg2, arg3) => {
+    console.log('alarmClock: ' + arg1 + ' ' + arg2 + ' ' + arg3);
+    alarmClock[arg1](arg2, arg3);
+});
+
+// Alarm object here
+let alarmClock = {
+    newTime: function(){
+        var d = new Date();
+        console.log(d);
+        let time = d.getHours();
+        console.log('Timer: ' + time);
+        console.log('Minutter: ' + d.getMinutes());
+    }
+}
+
 // Object with API connected to Bose Speaker
 let boseAPI = {
     getInfo: function(){
