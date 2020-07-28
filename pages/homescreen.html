@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="middle">
-        <h1>Please Select Preset</h1>
+        <h1 id="infoToUser">Please Select Preset</h1>
     </div>
     <div class="middle">
         <input type="time" id="appt" name="appt">
@@ -16,20 +16,21 @@
     <br>
     <br>
     <div class="middle">
-        <button id="PRESET_1" type="button" onclick="startAlarm(this.id)">1</button>
-        <button id="PRESET_2" type="button" onclick="startAlarm(this.id)">2</button>
-        <button id="PRESET_3" type="button" onclick="startAlarm(this.id)">3</button>
+        <button id="PRESET_1" type="button" onclick="savePreset(this.id)">1</button>
+        <button id="PRESET_2" type="button" onclick="savePreset(this.id)">2</button>
+        <button id="PRESET_3" type="button" onclick="savePreset(this.id)">3</button>
         <br>
-        <button id="PRESET_4" type="button" onclick="startAlarm(this.id)">4</button>
-        <button id="PRESET_5" type="button" onclick="startAlarm(this.id)">5</button>
-        <button id="PRESET_6" type="button" onclick="startAlarm(this.id)">6</button>
-    </div>
-    <div class="middle">
-        <button type="button" onclick="pauseAudio()">Pause Audio</button>
+        <button id="PRESET_4" type="button" onclick="savePreset(this.id)">4</button>
+        <button id="PRESET_5" type="button" onclick="savePreset(this.id)">5</button>
+        <button id="PRESET_6" type="button" onclick="savePreset(this.id)">6</button>
     </div>
     <br>
     <div class="middle">
-        <button type="button" onclick="startDate()">Start Date</button>
+        <button type="button" onclick="startAlarm()">Start Alarm</button>
+    </div>
+    <br>
+    <div class="middle">
+        <button type="button" onclick="pauseAudio()">Pause Audio</button>
     </div>
 <!-- Down below is credit for images -->
 <!-- Move this section to credit section in electron -->

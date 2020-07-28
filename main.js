@@ -4,6 +4,8 @@ var request = require('request');
 // Global variables used in the request to bose API
 var ipAdress = '192.168.1.200';
 var socket = ':8090';
+var preset = null; // Saving preset choosen for when alarm starts
+var mainWindow = null;
 
 // ipcMain method coming in
 ipcMain.on('boseAPI', (event, arg1, arg2, arg3) => {
@@ -39,6 +41,20 @@ let alarmClock = {
     stopTimer: function(intervalID){
         console.log('Interval Cleared');
         clearInterval(intervalID);
+    },
+    start: function(){
+        if(preset == null){
+            mainWindow.webContents.send('updateText', 'Please Choose Preset');
+            return;
+        }
+        
+        // Check if time is set
+        
+        // Start timer to check
+    },
+    savePreset: function(newPreset){
+        preset = newPreset;
+        console.log('Preset saved. ' + newPreset);
     }
 }
 
@@ -86,14 +102,14 @@ let boseAPI = {
 
 // Setting up and starting electron below 
 function startHomescreen(){
-    const win = new BrowserWindow({
+    mainWindow = new BrowserWindow({
         width: 350,
         height: 500,
         webPreferences: {
             nodeIntegration: true
         }
     })
-    win.loadFile(__dirname + '/pages/homescreen.html');
+    mainWindow.loadFile(__dirname + '/pages/homescreen.html');
     
 }
 
