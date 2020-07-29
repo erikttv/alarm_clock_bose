@@ -17,7 +17,8 @@ function savePreset(preset){
 }
 
 function startAlarm(){
-    ipcRenderer.send('alarmClock', 'start');
+    let timeForAlarm = document.getElementById('timeOfAlarm').value;
+    ipcRenderer.send('alarmClock', 'start', timeForAlarm);
 }
 
 ipcRenderer.on('updateText', (event, text) => {

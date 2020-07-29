@@ -20,7 +20,8 @@ ipcMain.on('alarmClock', (event, arg1, arg2, arg3) => {
 
 // Alarm object here
 let alarmClock = {
-    newTime: function(){
+    // Testing the time function
+    newTime: function(){ 
         var d = new Date();
         console.log(d);
         let minutes = d.getMinutes();
@@ -32,29 +33,46 @@ let alarmClock = {
             let e = new Date();
             console.log('now: ' + e.getMinutes() + ' exactly: ' + e + ' future: ' + addedMinute)
             if(e.getMinutes() == addedMinute){
-                this.stopTimer(intervalID);
+                clearInterval(intervalID);
             } else {
                 console.log('Minute is not equal');
             }
         }, 3000);
     },
-    stopTimer: function(intervalID){
-        console.log('Interval Cleared');
-        clearInterval(intervalID);
-    },
-    start: function(){
-        if(preset == null){
+    start: function(timeForAlarm){
+        if(timeForAlarm == ''){
+            mainWindow.webContents.send('updateText', 'Please Choose Time');
+            return;
+        }
+        if(!preset){
             mainWindow.webContents.send('updateText', 'Please Choose Preset');
             return;
         }
+        // Manipulating the string to fetch hour and minutes
+        let splittedTime = timeForAlarm.split(':');
+        let hours = Number(splittedTime[0]);
+        let minute = Number(splittedTime[1]);
         
-        // Check if time is set
-        
-        // Start timer to check
+        // Starting the process of checking the time regularly
+        this.startCheckInterval(hours, minute);
     },
     savePreset: function(newPreset){
         preset = newPreset;
         console.log('Preset saved. ' + newPreset);
+    },
+    startCheckInterval: function(hours, minute){
+        let intervalID = setInterval(() => {
+            let currentTime = new Date();
+            let isMinutesEqual = currentTime.getMinutes() == minute;
+            let isHoursEqual = currentTime.getHours() == hours;
+            if(isMinutesEqual && isHoursEqual){
+                console.log('Minute: ' + currentTime.getMinutes() + minute +'  and hours: ' + currentTime.getHours() + hours +' are equal.');
+                boseAPI['startPreset'](preset);
+                clearInterval(intervalID);
+            } else {
+                console.log('Not equal! ' + currentTime);
+            }
+        }, 1000)
     }
 }
 
