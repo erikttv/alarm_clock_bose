@@ -1,4 +1,4 @@
-const {ipcRenderer, ipcMain} = require('electron');
+const {ipcRenderer} = require('electron');
 
 function startAlarm(preset){
     ipcRenderer.send('boseAPI', 'startPreset', preset);
@@ -21,6 +21,10 @@ function startAlarm(){
     ipcRenderer.send('alarmClock', 'start', timeForAlarm);
 }
 
+function stopAlarm(){
+    ipcRenderer.send('alarmClock', 'stop');
+}
+
 ipcRenderer.on('updateText', (event, text) => {
     document.querySelector('#infoToUser').innerHTML = text;
 });
@@ -39,10 +43,6 @@ ipcRenderer.on('changeToAlarmUI', (event) => {
     document.querySelector('body').classList.add('setAlarmDiv');
 
 });
-
-function stopAlarm(){
-    ipcRenderer.send('alarmClock', 'stop');
-}
 
 ipcRenderer.on('changeToSetAlarmUI', (event) =>{
     let hideElements = document.querySelectorAll('.UIBeforeSetAlarm');
