@@ -2,3 +2,4 @@
 Installations required from npm:
 - electron
 - request
+- xml2js

@@ -1,14 +1,15 @@
 const {app, BrowserWindow, ipcMain} = require('electron');
 var request = require('request');
+var parseString = require('xml2js').parseString;
 
 // Global variables used in the request to bose API
-var ipAdress = '192.168.1.200';
-var socket = ':8090';
+var ipAdress = '192.168.1.200'; // Change the local ip to your own SoundTouch Speaker
+var socket = ':8090'; // This is the standard port for SoundTouch Speakers
 var preset = null; // Saving preset choosen for when alarm starts
-var mainWindow = null;
-var intervalID;
+var mainWindow = null; // The window opening
+var intervalID; // id for interval when alarm has started
+var channelName = []; // Name of the radio preset, index 0 is PRESET_1 and index 1 is PRESET_2 etc...
 
-// ipcMain method coming in
 ipcMain.on('boseAPI', (event, arg1, arg2, arg3) => {
     console.log('boseAPI: ' + arg1 + ' ' + arg2 + ' ' + arg3);
     boseAPI[arg1](arg2, arg3);
@@ -70,7 +71,7 @@ let alarmClock = {
             if(isMinutesEqual && isHoursEqual){
                 console.log('Minute: ' + currentTime.getMinutes() + minute +'  and hours: ' + currentTime.getHours() + hours +' are equal.');
                 boseAPI['startPreset'](preset);
-                clearInterval(intervalID);
+                this.stop();
             } else {
                 console.log('Not equal! ' + currentTime);
             }
@@ -78,7 +79,9 @@ let alarmClock = {
     },
     changeToAlarmUI: function(timeForAlarm){
         // Info to screen that interval is set
-        mainWindow.webContents.send('updateText', 'Alarm at: ' + timeForAlarm);
+        let presetNumber = preset.split('_');
+        let indexOfChannel = Number(presetNumber[1])-1;
+        mainWindow.webContents.send('updateText', channelName[indexOfChannel] + ' at ' + timeForAlarm);
         mainWindow.webContents.send('changeToAlarmUI');
     },
     stop: function(){ // Stopping alarm and setting UI back to normal
@@ -89,14 +92,22 @@ let alarmClock = {
 
 // Object with API connected to Bose Speaker
 let boseAPI = {
-    getInfo: function(){
+    getInfoAboutPreset: function(){
         var options = {
             'method': 'GET',
-            'url': 'http://' + ipAdress + socket + '/info',
+            'url': 'http://' + ipAdress + socket + '/presets',
           };
         request(options, function (error, response) {
             if (error) throw new Error(error);
-            console.log(response.body);
+            parseString(response.body, function (err, result) {
+                // Getting info about the preset
+                let preset = result.presets.preset;
+                preset.forEach(element => {
+                    channelName.push(element.ContentItem[0].itemName[0]);
+                });
+            });
+            // Updating the UI
+            mainWindow.webContents.send('changeNameOfPreset', channelName);
         });
     }, 
     startPreset: function(preset){
@@ -132,8 +143,8 @@ let boseAPI = {
 // Setting up and starting electron below 
 function startHomescreen(){
     mainWindow = new BrowserWindow({
-        width: 350,
-        height: 500,
+        width: 600,
+        height: 450,
         webPreferences: {
             nodeIntegration: true
         }
@@ -142,7 +153,7 @@ function startHomescreen(){
     
     // Fetching information about preset and adding it to the homescreen
     mainWindow.webContents.on('did-finish-load', ()=>{
-        boseAPI['getInfo']();
+        boseAPI['getInfoAboutPreset']();
       });
 }
 

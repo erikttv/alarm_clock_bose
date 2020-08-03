@@ -56,4 +56,15 @@ ipcRenderer.on('changeToSetAlarmUI', (event) =>{
     document.querySelector('#infoToUser').innerHTML = 'Please Select Preset';
 });
 
+ipcRenderer.on('changeNameOfPreset', (event, listWithChannels) => {
+    let newButtons = ` <button id="PRESET_1" type="button" onclick="savePreset(this.id)">` + listWithChannels[0] + `</button>
+    <button id="PRESET_2" type="button" onclick="savePreset(this.id)">`+listWithChannels[1]+`</button>
+    <button id="PRESET_3" type="button" onclick="savePreset(this.id)">`+listWithChannels[2]+`</button>
+    <br>
+    <button id="PRESET_4" type="button" onclick="savePreset(this.id)">`+listWithChannels[3]+`</button>
+    <button id="PRESET_5" type="button" onclick="savePreset(this.id)">`+listWithChannels[4]+`</button>
+    <button id="PRESET_6" type="button" onclick="savePreset(this.id)">`+listWithChannels[5]+`</button>`;
+    document.querySelector('#buttonPreset').innerHTML = newButtons;
+})
+
 
