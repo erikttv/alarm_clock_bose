@@ -22,25 +22,6 @@ ipcMain.on('alarmClock', (event, arg1, arg2, arg3) => {
 
 // Alarm object here
 let alarmClock = {
-    // Testing the time function
-    newTime: function(){ 
-        var d = new Date();
-        console.log(d);
-        let minutes = d.getMinutes();
-        let hours = d.getHours();
-        console.log('Timer: ' + hours);
-        console.log('Minutter: ' + minutes);
-        let addedMinute = minutes + 1;
-        let intervalID = setInterval(()=> {
-            let e = new Date();
-            console.log('now: ' + e.getMinutes() + ' exactly: ' + e + ' future: ' + addedMinute)
-            if(e.getMinutes() == addedMinute){
-                clearInterval(intervalID);
-            } else {
-                console.log('Minute is not equal');
-            }
-        }, 3000);
-    },
     start: function(timeForAlarm){
         if(timeForAlarm == ''){
             mainWindow.webContents.send('updateText', 'Please Choose Time');
@@ -170,5 +151,3 @@ app.on('activate', () => {
       startHomescreen();
     }
   });
-
-

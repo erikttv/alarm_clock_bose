@@ -66,6 +66,4 @@ ipcRenderer.on('changeNameOfPreset', (event, listWithChannels) => {
     <button id="PRESET_5" type="button" onclick="savePreset(this.id)">`+listWithChannels[4]+`</button>
     <button id="PRESET_6" type="button" onclick="savePreset(this.id)">`+listWithChannels[5]+`</button>`;
     document.querySelector('#buttonPreset').innerHTML = newButtons;
-})
-
-
+});
