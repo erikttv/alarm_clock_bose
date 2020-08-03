@@ -10,12 +10,12 @@
     <div class="middle">
         <h1 id="infoToUser">Please Select Preset</h1>
     </div>
-    <div class="middle changeUIWhenAlarm">
+    <div class="middle UIBeforeSetAlarm">
         <input type="time" id="timeOfAlarm" name="timeOfAlarm">
     </div>
-    <br class="changeUIWhenAlarm">
-    <br class="changeUIWhenAlarm">
-    <div class="middle changeUIWhenAlarm">
+    <br class="UIBeforeSetAlarm">
+    <br class="UIBeforeSetAlarm">
+    <div class="middle UIBeforeSetAlarm">
         <button id="PRESET_1" type="button" onclick="savePreset(this.id)">1</button>
         <button id="PRESET_2" type="button" onclick="savePreset(this.id)">2</button>
         <button id="PRESET_3" type="button" onclick="savePreset(this.id)">3</button>
@@ -24,14 +24,19 @@
         <button id="PRESET_5" type="button" onclick="savePreset(this.id)">5</button>
         <button id="PRESET_6" type="button" onclick="savePreset(this.id)">6</button>
     </div>
-    <br class="changeUIWhenAlarm">
-    <div class="middle changeUIWhenAlarm">
+    <br class="UIBeforeSetAlarm">
+    <div class="middle UIBeforeSetAlarm">
         <button type="button" onclick="startAlarm()">Start Alarm</button>
     </div>
-    <br class="changeUIWhenAlarm">
+    <div class="middle" id="stopAlarm">
+        <!-- When activating alarm a stop alarm button will be inserted here -->
+    </div>
+    <br class="UIBeforeSetAlarm">
+    <!-- Not sure if this functionality is needed
     <div class="middle">
         <button type="button" onclick="pauseAudio()">Stop Audio</button>
     </div>
+    -->
 <!-- Down below is credit for images -->
 <!-- Move this section to credit section in electron -->
 <!-- 

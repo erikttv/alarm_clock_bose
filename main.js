@@ -6,6 +6,7 @@ var ipAdress = '192.168.1.200';
 var socket = ':8090';
 var preset = null; // Saving preset choosen for when alarm starts
 var mainWindow = null;
+var intervalID;
 
 // ipcMain method coming in
 ipcMain.on('boseAPI', (event, arg1, arg2, arg3) => {
@@ -62,7 +63,7 @@ let alarmClock = {
         console.log('Preset saved. ' + newPreset);
     },
     startCheckInterval: function(hours, minute){
-        let intervalID = setInterval(() => {
+        intervalID = setInterval(() => {
             let currentTime = new Date();
             let isMinutesEqual = currentTime.getMinutes() == minute;
             let isHoursEqual = currentTime.getHours() == hours;
@@ -79,6 +80,10 @@ let alarmClock = {
         // Info to screen that interval is set
         mainWindow.webContents.send('updateText', 'Alarm at: ' + timeForAlarm);
         mainWindow.webContents.send('changeToAlarmUI');
+    },
+    stop: function(){ // Stopping alarm and setting UI back to normal
+        clearInterval(intervalID);
+        mainWindow.webContents.send('changeToSetAlarmUI');
     }
 }
 
