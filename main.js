@@ -55,6 +55,7 @@ let alarmClock = {
         
         // Starting the process of checking the time regularly
         this.startCheckInterval(hours, minute);
+        this.changeToAlarmUI(timeForAlarm);
     },
     savePreset: function(newPreset){
         preset = newPreset;
@@ -73,6 +74,11 @@ let alarmClock = {
                 console.log('Not equal! ' + currentTime);
             }
         }, 1000)
+    },
+    changeToAlarmUI: function(timeForAlarm){
+        // Info to screen that interval is set
+        mainWindow.webContents.send('updateText', 'Alarm at: ' + timeForAlarm);
+        mainWindow.webContents.send('changeToAlarmUI');
     }
 }
 

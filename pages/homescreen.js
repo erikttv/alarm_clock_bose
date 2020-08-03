@@ -25,4 +25,21 @@ ipcRenderer.on('updateText', (event, text) => {
     document.querySelector('#infoToUser').innerHTML = text;
 });
 
+ipcRenderer.on('changeToAlarmUI', (event) => {
+    // Removing different elements from the screen
+    let hideElements = document.querySelectorAll('.changeUIWhenAlarm');
+    hideElements.forEach(element => {
+        element.style.display = "none";
+    });
+    /*
+    document.querySelector('#presetButtons').style.display = "none";
+    document.querySelector('#startAlarm').style.display = "none";
+    document.querySelector('#setAlarm')
+    */
+
+    // Centering the body
+    document.querySelector('body').classList.add('setAlarmDiv');
+
+});
+
 

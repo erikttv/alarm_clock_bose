@@ -18,6 +18,17 @@ h1 {
   position: relative;
 }
 
+/* Centering everything on screen */
+.setAlarmDiv {
+  height: 200px;
+  width: 400px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -200px;
+}
+
 button {
   display: inline-block;
   line-height: 1;

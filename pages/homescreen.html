@@ -10,12 +10,12 @@
     <div class="middle">
         <h1 id="infoToUser">Please Select Preset</h1>
     </div>
-    <div class="middle">
+    <div class="middle changeUIWhenAlarm">
         <input type="time" id="timeOfAlarm" name="timeOfAlarm">
     </div>
-    <br>
-    <br>
-    <div class="middle">
+    <br class="changeUIWhenAlarm">
+    <br class="changeUIWhenAlarm">
+    <div class="middle changeUIWhenAlarm">
         <button id="PRESET_1" type="button" onclick="savePreset(this.id)">1</button>
         <button id="PRESET_2" type="button" onclick="savePreset(this.id)">2</button>
         <button id="PRESET_3" type="button" onclick="savePreset(this.id)">3</button>
@@ -24,13 +24,13 @@
         <button id="PRESET_5" type="button" onclick="savePreset(this.id)">5</button>
         <button id="PRESET_6" type="button" onclick="savePreset(this.id)">6</button>
     </div>
-    <br>
-    <div class="middle">
+    <br class="changeUIWhenAlarm">
+    <div class="middle changeUIWhenAlarm">
         <button type="button" onclick="startAlarm()">Start Alarm</button>
     </div>
-    <br>
+    <br class="changeUIWhenAlarm">
     <div class="middle">
-        <button type="button" onclick="pauseAudio()">Pause Audio</button>
+        <button type="button" onclick="pauseAudio()">Stop Audio</button>
     </div>
 <!-- Down below is credit for images -->
 <!-- Move this section to credit section in electron -->
