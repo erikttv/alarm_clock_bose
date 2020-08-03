@@ -4,7 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build-osx": "electron-packager . --overwrite --platform=darwin --icon=pages/images/forest.icns"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,8 @@
     "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
-    "electron": "^9.1.0"
-  }
+    "electron": "^9.1.0",
+    "electron-packager": "^15.0.0"
+  },
+  "productName": "Bose Radio"
 }
