@@ -140,6 +140,10 @@ function startHomescreen(){
     })
     mainWindow.loadFile(__dirname + '/pages/homescreen.html');
     
+    // Fetching information about preset and adding it to the homescreen
+    mainWindow.webContents.on('did-finish-load', ()=>{
+        boseAPI['getInfo']();
+      });
 }
 
 app.whenReady().then(startHomescreen);
