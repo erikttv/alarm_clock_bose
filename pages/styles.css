@@ -1,5 +1,5 @@
 body {
-    background-image: url('./images/low_res_forest_road.jpg');
+    background-image: url('./images/forest_low_res.jpg');
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -7,7 +7,19 @@ body {
   }
 
 h1 {
-  color: #E3F0DC;
+  color: #E3F0DC; 
+}
+
+.centeringToScreen{
+  padding-top: 50px;
+}
+
+.addBackgroundColour{
+  display: table;
+  margin: 0px auto 0px auto; /* keep the table centered */
+  padding:2px;
+  background-color:#4c4e40;
+  color:#ffffff;
 }
 
 .outline{
@@ -34,7 +46,7 @@ button {
   line-height: 1;
   white-space: nowrap;
   cursor: pointer;
-  background: #777262;
+  background: #E3F0DC; /*#777262*/
   border: 1px solid #92B181;
   color: #000000;
   -webkit-appearance: none;

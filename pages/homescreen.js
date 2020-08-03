@@ -41,7 +41,7 @@ ipcRenderer.on('changeToAlarmUI', (event) => {
 
     // Centering the body
     document.querySelector('body').classList.add('setAlarmDiv');
-
+    document.querySelector('body').classList.remove('centeringToScreen');
 });
 
 ipcRenderer.on('changeToSetAlarmUI', (event) =>{
@@ -54,6 +54,7 @@ ipcRenderer.on('changeToSetAlarmUI', (event) =>{
     document.querySelector('#stopAlarm').innerHTML ='';
     document.querySelector('body').classList.remove('setAlarmDiv');
     document.querySelector('#infoToUser').innerHTML = 'Please Select Preset';
+    document.querySelector('body').classList.add('centeringToScreen');
 });
 
 ipcRenderer.on('changeNameOfPreset', (event, listWithChannels) => {

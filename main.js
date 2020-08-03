@@ -47,7 +47,7 @@ let alarmClock = {
             return;
         }
         if(!preset){
-            mainWindow.webContents.send('updateText', 'Please Choose Preset');
+            mainWindow.webContents.send('updateText', 'Please Choose Radio Channel');
             return;
         }
         // Manipulating the string to fetch hour and minutes
@@ -143,8 +143,8 @@ let boseAPI = {
 // Setting up and starting electron below 
 function startHomescreen(){
     mainWindow = new BrowserWindow({
-        width: 600,
-        height: 450,
+        width: 450, //600
+        height: 600, //450
         webPreferences: {
             nodeIntegration: true
         }
