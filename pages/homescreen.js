@@ -25,6 +25,22 @@ function stopAlarm(){
     ipcRenderer.send('alarmClock', 'stop');
 }
 
+function startRadio(preset){
+    ipcRenderer.send('boseAPI','startPreset', preset);
+}
+
+function alarmApp(){
+    ipcRenderer.send('updateScreen', 'alarm');
+}
+
+function controlerApp(){
+    ipcRenderer.send('updateScreen', 'controler');
+}
+
+function changeFunction(){
+    ipcRenderer.send('updateScreen', 'changeUI');
+}
+
 ipcRenderer.on('updateText', (event, text) => {
     document.querySelector('#infoToUser').innerHTML = text;
 });
@@ -57,6 +73,7 @@ ipcRenderer.on('changeToSetAlarmUI', (event) =>{
     document.querySelector('body').classList.add('centeringToScreen');
 });
 
+/*
 ipcRenderer.on('changeNameOfPreset', (event, listWithChannels) => {
     let newButtons = ` <button id="PRESET_1" type="button" onclick="savePreset(this.id)">` + listWithChannels[0] + `</button>
     <button id="PRESET_2" type="button" onclick="savePreset(this.id)">`+listWithChannels[1]+`</button>
@@ -66,4 +83,9 @@ ipcRenderer.on('changeNameOfPreset', (event, listWithChannels) => {
     <button id="PRESET_5" type="button" onclick="savePreset(this.id)">`+listWithChannels[4]+`</button>
     <button id="PRESET_6" type="button" onclick="savePreset(this.id)">`+listWithChannels[5]+`</button>`;
     document.querySelector('#buttonPreset').innerHTML = newButtons;
+});
+*/
+
+ipcRenderer.on('changeUI', (event, userInterface) => {
+    document.querySelector('#mainScreenUI').innerHTML = userInterface;
 });

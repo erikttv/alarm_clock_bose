@@ -8,7 +8,8 @@ var socket = ':8090'; // This is the standard port for SoundTouch Speakers
 var preset = null; // Saving preset choosen for when alarm starts
 var mainWindow = null; // The window opening
 var intervalID; // id for interval when alarm has started
-var channelName = []; // Name of the radio preset, index 0 is PRESET_1 and index 1 is PRESET_2 etc...
+var channelName = [1,2,3,4,5,6]; // Name of the radio preset, index 0 is PRESET_1 and index 1 is PRESET_2 etc...
+var currentScreen = 'controler'; // is a string
 
 ipcMain.on('boseAPI', (event, arg1, arg2, arg3) => {
     console.log('boseAPI: ' + arg1 + ' ' + arg2 + ' ' + arg3);
@@ -19,6 +20,88 @@ ipcMain.on('alarmClock', (event, arg1, arg2, arg3) => {
     console.log('alarmClock: ' + arg1 + ' ' + arg2 + ' ' + arg3);
     alarmClock[arg1](arg2, arg3);
 });
+
+ipcMain.on('updateScreen', (event, arg1, arg2)=>{
+    console.log('updateScreen: ' + arg1 + ' ' + arg2);
+    UIToScreen[arg1](arg2);
+});
+
+let UIToScreen = {
+    alarm: function(){
+        if(mainWindow){
+            currentScreen = 'alarm';
+            let screen = `
+                <div class="middle UIBeforeSetAlarm">
+                    <input type="time" id="timeOfAlarm" name="timeOfAlarm">
+                </div>
+                <br class="UIBeforeSetAlarm">
+                <br class="UIBeforeSetAlarm">
+                <div id="buttonPreset" class="middle UIBeforeSetAlarm">
+                    <button id="PRESET_1" type="button" onclick="savePreset(this.id)">`+ channelName[0]+`</button>
+                    <button id="PRESET_2" type="button" onclick="savePreset(this.id)">`+ channelName[1]+`</button>
+                    <button id="PRESET_3" type="button" onclick="savePreset(this.id)">`+ channelName[2]+`</button>
+                    <br>
+                    <button id="PRESET_4" type="button" onclick="savePreset(this.id)">`+ channelName[3]+`</button>
+                    <button id="PRESET_5" type="button" onclick="savePreset(this.id)">`+ channelName[4]+`</button>
+                    <button id="PRESET_6" type="button" onclick="savePreset(this.id)">`+ channelName[5]+`</button>
+                </div>
+                <br class="UIBeforeSetAlarm">
+                <div class="middle UIBeforeSetAlarm">
+                    <button type="button" onclick="startAlarm()">Start Alarm</button>
+                </div>
+                <div class="middle" id="stopAlarm">
+                    <!-- When activating alarm, a stop alarm button will be inserted here -->
+                </div>
+                <br class="UIBeforeSetAlarm">
+                <br>
+                <div>
+                    <button type="button" onclick="changeFunction()">Change Functionality</button>
+                </div>`;
+            mainWindow.webContents.send('changeUI', screen);
+        }
+    },
+    alarmSet: function(timeForAlarm){
+        // Info to screen that interval is set
+        if(mainWindow){
+            currentScreen = 'alarmSet';
+            let presetNumber = preset.split('_');
+            let indexOfChannel = Number(presetNumber[1])-1;
+            mainWindow.webContents.send('updateText', channelName[indexOfChannel] + ' at ' + timeForAlarm);
+            mainWindow.webContents.send('changeToAlarmUI');
+        }
+    },
+    controler: function(){
+        if(mainWindow){
+            currentScreen = 'controler';
+            let screen = `
+                <div id="buttonPreset" class="middle">
+                    <button id="PRESET_1" type="button" onclick="startRadio(this.id)">`+ channelName[0]+`</button>
+                    <button id="PRESET_2" type="button" onclick="startRadio(this.id)">`+ channelName[1]+`</button>
+                    <button id="PRESET_3" type="button" onclick="startRadio(this.id)">`+ channelName[2]+`</button>
+                    <br>
+                    <button id="PRESET_4" type="button" onclick="startRadio(this.id)">`+ channelName[3]+`</button>
+                    <button id="PRESET_5" type="button" onclick="startRadio(this.id)">`+ channelName[4]+`</button>
+                    <button id="PRESET_6" type="button" onclick="startRadio(this.id)">`+ channelName[5]+`</button>
+                </div>
+                <br>
+                <div class="middle">	
+                    <button type="button" onclick="pauseAudio()">Stop Audio</button>	
+                </div>
+                <br>
+                <div>
+                    <button type="button" onclick="changeFunction()">Change Functionality</button>
+                </div>`;
+            mainWindow.webContents.send('changeUI', screen);
+        }
+    },
+    changeUI: function(){
+        if(currentScreen == 'controler'){
+            this.alarm();
+        } else{
+            this.controler();
+        }
+    }
+}
 
 // Alarm object here
 let alarmClock = {
@@ -38,7 +121,7 @@ let alarmClock = {
         
         // Starting the process of checking the time regularly
         this.startCheckInterval(hours, minute);
-        this.changeToAlarmUI(timeForAlarm);
+        UIToScreen['alarmSet'](timeForAlarm);
     },
     savePreset: function(newPreset){
         preset = newPreset;
@@ -58,13 +141,6 @@ let alarmClock = {
             }
         }, 1000)
     },
-    changeToAlarmUI: function(timeForAlarm){
-        // Info to screen that interval is set
-        let presetNumber = preset.split('_');
-        let indexOfChannel = Number(presetNumber[1])-1;
-        mainWindow.webContents.send('updateText', channelName[indexOfChannel] + ' at ' + timeForAlarm);
-        mainWindow.webContents.send('changeToAlarmUI');
-    },
     stop: function(){ // Stopping alarm and setting UI back to normal
         clearInterval(intervalID);
         mainWindow.webContents.send('changeToSetAlarmUI');
@@ -83,12 +159,17 @@ let boseAPI = {
             parseString(response.body, function (err, result) {
                 // Getting info about the preset
                 let preset = result.presets.preset;
-                preset.forEach(element => {
-                    channelName.push(element.ContentItem[0].itemName[0]);
-                });
+                for (let index = 0; index < preset.length; index++) {
+                    channelName[index] = preset[index].ContentItem[0].itemName[0];
+                }
             });
             // Updating the UI
-            mainWindow.webContents.send('changeNameOfPreset', channelName);
+            if(currentScreen == 'controler'){
+                UIToScreen['controler']();
+            } else{
+                UIToScreen['alarm']();
+            }
+            // mainWindow.webContents.send('changeNameOfPreset', channelName);
         });
     }, 
     startPreset: function(preset){
@@ -129,7 +210,7 @@ function startHomescreen(){
         webPreferences: {
             nodeIntegration: true
         }
-    })
+    });
     mainWindow.loadFile(__dirname + '/pages/homescreen.html');
     
     // Fetching information about preset and adding it to the homescreen
@@ -140,11 +221,12 @@ function startHomescreen(){
 
 app.whenReady().then(startHomescreen);
 
+
 app.on('window-all-closed', ()=> {
-    if(process.platform != 'darwin'){
-        app.quit();
-    }
+    app.quit();
 });
+
+
 
 app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {

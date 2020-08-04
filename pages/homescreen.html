@@ -8,34 +8,27 @@
 </head>
 <body class="centeringToScreen">
     <div class="middle">
-        <h1 id="infoToUser">Please Select Preset</h1>
+        <h1 id="infoToUser">Welcome to Bose Controler!</h1>
     </div>
-    <div class="middle UIBeforeSetAlarm">
-        <input type="time" id="timeOfAlarm" name="timeOfAlarm">
-    </div>
-    <br class="UIBeforeSetAlarm">
-    <br class="UIBeforeSetAlarm">
-    <div id="buttonPreset" class="middle UIBeforeSetAlarm">
-        <button id="PRESET_1" type="button" onclick="savePreset(this.id)">1</button>
-        <button id="PRESET_2" type="button" onclick="savePreset(this.id)">2</button>
-        <button id="PRESET_3" type="button" onclick="savePreset(this.id)">3</button>
+    <div class="middle" id="mainScreenUI">
+        <div id="buttonPreset" class="middle">
+            <button id="PRESET_1" type="button" onclick="startRadio(this.id)">`+ channelName[0]+`</button>
+            <button id="PRESET_2" type="button" onclick="startRadio(this.id)">`+ channelName[1]+`</button>
+            <button id="PRESET_3" type="button" onclick="startRadio(this.id)">`+ channelName[2]+`</button>
+            <br>
+            <button id="PRESET_4" type="button" onclick="startRadio(this.id)">`+ channelName[3]+`</button>
+            <button id="PRESET_5" type="button" onclick="startRadio(this.id)">`+ channelName[4]+`</button>
+            <button id="PRESET_6" type="button" onclick="startRadio(this.id)">`+ channelName[5]+`</button>
+        </div>
         <br>
-        <button id="PRESET_4" type="button" onclick="savePreset(this.id)">4</button>
-        <button id="PRESET_5" type="button" onclick="savePreset(this.id)">5</button>
-        <button id="PRESET_6" type="button" onclick="savePreset(this.id)">6</button>
+        <div class="middle">	
+            <button type="button" onclick="pauseAudio()">Stop Audio</button>	
+        </div>
+        <br>
+        <div>
+            <button type="button" onclick="changeFunction()">Change Functionality</button>
+        </div>
     </div>
-    <br class="UIBeforeSetAlarm">
-    <div class="middle UIBeforeSetAlarm">
-        <button type="button" onclick="startAlarm()">Start Alarm</button>
-    </div>
-    <div class="middle" id="stopAlarm">
-        <!-- When activating alarm a stop alarm button will be inserted here -->
-    </div>
-    <br class="UIBeforeSetAlarm">
-    <div class="middle">	
-        <button type="button" onclick="pauseAudio()">Stop Audio</button>	
-    </div>
-    
 <!-- Down below is credit for images -->
 <!-- Move this section to credit section in electron -->
 <!-- 
