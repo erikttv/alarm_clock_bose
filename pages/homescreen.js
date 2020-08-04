@@ -10,6 +10,10 @@ function startDate(){
 
 function pauseAudio(){
     ipcRenderer.send('boseAPI', 'pauseAudio');
+    let chosenButton = document.querySelector('.choosenButton');
+    if(chosenButton){
+        chosenButton.classList.remove('choosenButton');
+    }
 }
 
 function savePreset(preset){

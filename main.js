@@ -55,7 +55,7 @@ let UIToScreen = {
                 <br class="UIBeforeSetAlarm">
                 <br>
                 <div class="UIBeforeSetAlarm">
-                    <button class="middle" type="button" onclick="changeFunction()">Change Functionality</button>
+                    <button class="middle" type="button" onclick="changeFunction()">Change to Controler</button>
                 </div>`;
             mainWindow.webContents.send('changeUI', screen);
             mainWindow.webContents.send('updateText', 'Welcome to Bose Alarm!')
@@ -90,7 +90,7 @@ let UIToScreen = {
                 </div>
                 <br>
                 <div>
-                    <button type="button" onclick="changeFunction()">Change Functionality</button>
+                    <button type="button" onclick="changeFunction()">Change to Alarm</button>
                 </div>`;
             mainWindow.webContents.send('changeUI', screen);
             mainWindow.webContents.send('updateText', 'Welcome to Bose Controler!')
