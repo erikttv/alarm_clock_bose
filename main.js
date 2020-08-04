@@ -54,10 +54,11 @@ let UIToScreen = {
                 </div>
                 <br class="UIBeforeSetAlarm">
                 <br>
-                <div>
-                    <button type="button" onclick="changeFunction()">Change Functionality</button>
+                <div class="UIBeforeSetAlarm">
+                    <button class="middle" type="button" onclick="changeFunction()">Change Functionality</button>
                 </div>`;
             mainWindow.webContents.send('changeUI', screen);
+            mainWindow.webContents.send('updateText', 'Welcome to Bose Alarm!')
         }
     },
     alarmSet: function(timeForAlarm){
@@ -92,6 +93,7 @@ let UIToScreen = {
                     <button type="button" onclick="changeFunction()">Change Functionality</button>
                 </div>`;
             mainWindow.webContents.send('changeUI', screen);
+            mainWindow.webContents.send('updateText', 'Welcome to Bose Controler!')
         }
     },
     changeUI: function(){
@@ -232,4 +234,4 @@ app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       startHomescreen();
     }
-  });
+});

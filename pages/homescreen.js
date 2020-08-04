@@ -14,6 +14,11 @@ function pauseAudio(){
 
 function savePreset(preset){
     ipcRenderer.send('alarmClock', 'savePreset', preset)
+    let chosenButton = document.querySelector('.choosenButton');
+    if(chosenButton){
+        chosenButton.classList.remove('choosenButton');
+    }
+    document.querySelector('#'+preset).classList.add('choosenButton');
 }
 
 function startAlarm(){
@@ -27,6 +32,11 @@ function stopAlarm(){
 
 function startRadio(preset){
     ipcRenderer.send('boseAPI','startPreset', preset);
+    let chosenButton = document.querySelector('.choosenButton');
+    if(chosenButton){
+        chosenButton.classList.remove('choosenButton');
+    }
+    document.querySelector('#'+preset).classList.add('choosenButton');
 }
 
 function alarmApp(){
@@ -72,19 +82,6 @@ ipcRenderer.on('changeToSetAlarmUI', (event) =>{
     document.querySelector('#infoToUser').innerHTML = 'Please Select Preset';
     document.querySelector('body').classList.add('centeringToScreen');
 });
-
-/*
-ipcRenderer.on('changeNameOfPreset', (event, listWithChannels) => {
-    let newButtons = ` <button id="PRESET_1" type="button" onclick="savePreset(this.id)">` + listWithChannels[0] + `</button>
-    <button id="PRESET_2" type="button" onclick="savePreset(this.id)">`+listWithChannels[1]+`</button>
-    <button id="PRESET_3" type="button" onclick="savePreset(this.id)">`+listWithChannels[2]+`</button>
-    <br>
-    <button id="PRESET_4" type="button" onclick="savePreset(this.id)">`+listWithChannels[3]+`</button>
-    <button id="PRESET_5" type="button" onclick="savePreset(this.id)">`+listWithChannels[4]+`</button>
-    <button id="PRESET_6" type="button" onclick="savePreset(this.id)">`+listWithChannels[5]+`</button>`;
-    document.querySelector('#buttonPreset').innerHTML = newButtons;
-});
-*/
 
 ipcRenderer.on('changeUI', (event, userInterface) => {
     document.querySelector('#mainScreenUI').innerHTML = userInterface;
