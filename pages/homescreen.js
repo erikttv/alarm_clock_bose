@@ -51,6 +51,14 @@ function changeFunction(){
     ipcRenderer.send('updateScreen', 'changeUI');
 }
 
+ipcRenderer.on('changeBackground', (event, text)=> {
+    if(text == 'add'){
+        document.querySelector('body').classList.add('backgroundForAlarm');
+    } else {
+        document.querySelector('body').classList.remove('backgroundForAlarm');
+    }
+})
+
 ipcRenderer.on('updateText', (event, text) => {
     document.querySelector('#infoToUser').innerHTML = text;
 });

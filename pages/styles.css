@@ -4,7 +4,15 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-  }
+}
+
+.backgroundForAlarm {
+  background-image: url('./images/alarm_low_res.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 
 h1 {
   color: #E3F0DC; 

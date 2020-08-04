@@ -1,4 +1,4 @@
-const {app, BrowserWindow, ipcMain} = require('electron');
+const {app, BrowserWindow, ipcMain, ipcRenderer} = require('electron');
 var request = require('request');
 var parseString = require('xml2js').parseString;
 
@@ -98,8 +98,10 @@ let UIToScreen = {
     },
     changeUI: function(){
         if(currentScreen == 'controler'){
+            mainWindow.webContents.send('changeBackground', 'add');
             this.alarm();
         } else{
+            mainWindow.webContents.send('changeBackground', 'remove');
             this.controler();
         }
     }
