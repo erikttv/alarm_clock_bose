@@ -95,6 +95,13 @@ ipcRenderer.on('changeToSetAlarmUI', (event) =>{
     document.querySelector('body').classList.add('centeringToScreen');
 });
 
+
 ipcRenderer.on('changeUI', (event, userInterface) => {
     document.querySelector('#mainScreenUI').innerHTML = userInterface;
 });
+
+
+function newVolume(value){
+    ipcRenderer.send('boseAPI', 'setVolume', value);
+}
+

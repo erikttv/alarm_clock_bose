@@ -3,3 +3,7 @@ Installations required from npm:
 - electron
 - request
 - xml2js
+
+### For further development ###
+- ws
+- bonjour

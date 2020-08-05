@@ -89,6 +89,12 @@ let UIToScreen = {
                     <button type="button" onclick="pauseAudio()">Stop Audio</button>	
                 </div>
                 <br>
+                <h2>Volume</h2>
+                <div class="slidecontainer">
+                    <input type="range" min="0" max="60" value="25" class="slider" id="myRange" oninput="newVolume(this.value)">
+                </div>
+                <br>
+                <br>
                 <div>
                     <button type="button" onclick="changeFunction()">Change to Alarm</button>
                 </div>`;
@@ -199,6 +205,20 @@ let boseAPI = {
             },
             body: `<?xml version="1.0" ?>\n<key state="press" sender="Gabbo">PAUSE</key>`
           };
+        request(options, function (error, response) {
+            if (error) throw new Error(error);
+            console.log(response.body);
+        });
+    },
+    setVolume: function(volume){
+        var options = {
+            'method': 'POST',
+            'url': 'http://' + ipAdress + socket + '/volume',
+            'headers': {
+                'Content-Type': 'application/xml'
+            },
+            body: `<?xml version="1.0" ?>\n<volume>`+volume+`</volume>`
+        };
         request(options, function (error, response) {
             if (error) throw new Error(error);
             console.log(response.body);
